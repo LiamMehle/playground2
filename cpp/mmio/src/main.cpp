@@ -27,12 +27,12 @@ int main() {
 		return errno;
 	}
 
-
+	auto test = []( uint32_t* const io_base, int function ){
 	for( uint_fast8_t pin = 0; pin < 28; pin++ ) { // all pins
 		for( uint_fast8_t value = 0; value <= 1; value++) { // both values
 				bool wr_value = value;
 				printf("%2u=%u\t", pin, value );
-				peri::gpio_fs( io_base, pin, peri::out );
+				peri::gpio_fs( io_base, pin, function );
 				peri::gpio_write( io_base, pin, wr_value );
 				msleep(10);
 				bool rd_value = peri::gpio_read( io_base, pin );
@@ -44,7 +44,11 @@ int main() {
 			}
 			printf("\n");
 		}
-	
+	};
+	test( io_base, peri::out);
+	puts("------------------------------");
+	test( io_base, peri::in);
+
 	// cleanup
 	peri::unmap_io( io_base ); // made it explicit for sake of making it clear
 	                             // this is an invalid pointer now.
