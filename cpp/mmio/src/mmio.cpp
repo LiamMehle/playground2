@@ -70,32 +70,37 @@ void peripheral::gpio_fs( uint32_t* const base_io, const int pin,
 		address::offset( base_io, address::offset_gpio + address::offset_gpio_fs );
 	// 10 fs registers per word. Select the correct word
 	// then shift by remainder * bits per function select register
-	//printf("from %x = %x\n", base_gpio_fs, *base_gpio_fs);
 	uint32_t* const gpio_fs = address::offset( base_gpio_fs, pin/10 );
-	printf("writing 0x%llx = 0x%x (setting function)\n", (uint64_t)gpio_fs, ~static_cast<uint32_t>((0b111<<((pin%10)*3))));
-	*gpio_fs &= ~ static_cast<uint32_t>((0b111<<((pin%10)*3)));
-	*gpio_fs |= static_cast<uint32_t>(  function<<((pin%10)*3));
+	const uint_fast8_t shift = (pin%10)*3;
+	//printf("writing 0x%llx = 0x%x (setting function)\n", (uint64_t)gpio_fs, static_cast<uint32_t>((0b1<<((pin%10)*3))));
+	*gpio_fs &= ~ static_cast<uint32_t>((0b111<<shift)); // clear function
+	*gpio_fs |= static_cast<uint32_t>(function<<shift);  // set function
 	//printf("to  %x = %x\n", base_gpio_fs, *base_gpio_fs);
 
 }
 
 void peripheral::gpio_write( uint32_t* const base_io, const int pin,
 	                                             const bool level ) noexcept {
+	const uint_fast8_t shift = pin%32;
 	if(level) {
-		uint32_t* const base_gpio_set =
+		uint32_t* const gpio_set =
 			address::offset( base_io, address::offset_gpio +
 			                          address::offset_gpio_out_set );
-		printf("writing 0x%llx = 0x%llx (pull high)\n", (uint64_t)&base_gpio_set[pin/32], (uint64_t)1<<(pin%32));
-		base_gpio_set[pin/32] = 1<<(pin%32);
+		//printf("writing 0x%llx = 0x%llx (pull high)\n", (uint64_t)&gpio_set[pin/32], (uint64_t)1<<(pin%32));
+		gpio_set[pin/32] = 1<<shift;
 	} else {
-		uint32_t* const base_gpio_clr =
+		uint32_t* const gpio_clr =
 			address::offset( base_io, address::offset_gpio +
 			                          address::offset_gpio_out_clr );
-		printf("writing 0x%llx = 0x%llx (pull low)\n", (uint64_t)&base_gpio_clr[pin/32], (uint64_t)1<<(pin%32));
-		base_gpio_clr[pin/32] = 1<<(pin%32);
+		//printf("writing 0x%llx = 0x%llx (pull low)\n", (uint64_t)&gpio_clr[pin/32], (uint64_t)1<<(pin%32));
+		gpio_clr[pin/32] = 1<<shift;
 	}
 }
 
-//peripheral::address::get_phys_gpio_set() {
-
-//peripheral::address::get_phys_gpio_clr() {
+bool peripheral::gpio_read( uint32_t* base_io, int pin ) noexcept {
+	uint32_t* const gpio_lev =
+		address::offset( base_io, address::offset_gpio +
+															address::offset_gpio_lev );
+	const uint_fast8_t shift = pin%32;
+	return *gpio_lev & 1<<shift;
+}

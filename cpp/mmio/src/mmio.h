@@ -13,7 +13,7 @@ namespace peripheral {
 				constexpr uint64_t offset_gpio_fs      = 0x0000'0000;
 				constexpr uint64_t offset_gpio_out_set = 0x0000'001C;
 				constexpr uint64_t offset_gpio_out_clr = 0x0000'0028;
-				constexpr uint64_t offset_gpio_in      = 0x0000'0034;
+				constexpr uint64_t offset_gpio_lev     = 0x0000'0034;
 
 
 		template<typename T1, typename T2>
@@ -56,6 +56,8 @@ namespace peripheral {
 	void fill_recognisable( uint32_t* const addr, const uint64_t size ) noexcept;
 	void gpio_fs( uint32_t* base_io, int pin, int function ) noexcept ; // sets pin function
 	void gpio_write( uint32_t* base_io, int pin, bool level ) noexcept ; // sets pin level
+	[[nodiscard]]
+	bool gpio_read( uint32_t* base_io, int pin ) noexcept ;
 }
 
 #endif
