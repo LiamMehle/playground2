@@ -63,7 +63,7 @@ int main() {
 		printf( "[ERROR] peripheral::map() returned %d\n", errno );
 		return errno;
 	}
-	test_pin( io_base, 2);
+	//test_pin( io_base, 10);
 	puts("------------------------------");
 	test_function( io_base, peripheral::out);
 	puts("------------------------------");

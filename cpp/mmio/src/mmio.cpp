@@ -70,7 +70,7 @@ void peripheral::gpio_fs( uint32_t* const base_io, const int pin,
 		address::offset( base_io, address::offset_gpio + address::offset_gpio_fs );
 	// 10 fs registers per word. Select the correct word
 	// then shift by remainder * bits per function select register
-	uint32_t* const gpio_fs = address::offset( base_gpio_fs, pin/10 );
+	uint32_t* const gpio_fs = &base_gpio_fs[pin/10];
 	const uint_fast8_t shift = (pin%10)*3;
 	//printf("writing 0x%llx = 0x%x (setting function)\n", (uint64_t)gpio_fs, static_cast<uint32_t>((0b1<<((pin%10)*3))));
 	*gpio_fs &= ~ static_cast<uint32_t>((0b111<<shift)); // clear function
