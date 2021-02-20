@@ -14,12 +14,28 @@ namespace peripheral {
 				constexpr uint64_t offset_gpio_out_set = 0x0000'001C;
 				constexpr uint64_t offset_gpio_out_clr = 0x0000'0028;
 				constexpr uint64_t offset_gpio_lev     = 0x0000'0034;
+			constexpr uint64_t offset_interrupt      = 0x0000'B000;
+				constexpr uint64_t offset_irq_pending  = 0x0000'0200;
+				constexpr uint64_t offset_irq_pending_1 = 0x000'0204;
+				constexpr uint64_t offset_irq_pending_2 = 0x000'0208;
+				constexpr uint64_t offset_fiq_enable   = 0x0000'020C;
+				constexpr uint64_t offset_irq_enable_1  = 0x000'0210;
+				constexpr uint64_t offset_irq_enable_2  = 0x000'0214;
+				constexpr uint64_t offset_irq_enable   = 0x0000'0218;
+				constexpr uint64_t offset_irq_disable_1 = 0x000'021C;
+				constexpr uint64_t offset_irq_disable_2 = 0x000'0220;
+				constexpr uint64_t offset_irq_disable   = 0x000'0224;
 
 
 		template<typename T1, typename T2>
 		constexpr
 		T1* offset( T1* addr, T2 offset ) { // offset by *offset* bytes instead
 			return reinterpret_cast<T1*>((reinterpret_cast<char*>(addr) + offset));
+		}
+		[[nodiscard]]
+		constexpr
+		uint32_t* get_gpio_read_address( uint32_t* base_io ) noexcept {
+			return offset( base_io, offset_gpio + offset_gpio_lev );
 		}
 	}
 	enum Function:char {
@@ -58,6 +74,8 @@ namespace peripheral {
 	void gpio_write( uint32_t* base_io, int pin, bool level ) noexcept ; // sets pin level
 	[[nodiscard]]
 	bool gpio_read( uint32_t* base_io, int pin ) noexcept ;
+	[[nodiscard]]
+	volatile uint32_t gpio_read_page( uint32_t* base_io ) noexcept ;
 }
 
 #endif

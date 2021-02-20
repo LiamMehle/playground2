@@ -63,14 +63,22 @@ int main() {
 	if( ret )
 		return ret;
 	//test_pin( io_base, 10);
-	puts("------------------------------");
-	test_function( io_base, peripheral::out);
-	puts("------------------------------");
-	test_function( io_base, peripheral::in);
-
-	peripheral::gpio_fs( io_base, 17, peripheral::out );
-	peripheral::gpio_write( io_base, 17, peripheral::high );
-
+	//puts("------------------------------");
+	//test_function( io_base, peripheral::out);
+	//puts("------------------------------");
+	//test_function( io_base, peripheral::in);
+	const clock_t begin = clock();
+	const auto iterations = 10'000'000;
+	volatile uint32_t* const lev_addr = addr::get_gpio_read_address( io_base );
+	#pragma unroll
+	for( int i = 0; i < iterations; ++i ){
+		if( *lev_addr == 0 )
+			[[unlikely]] break;
+		//printf("%x\n", *lev_addr );
+	}
+	const clock_t end = clock();
+	const double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	printf("%fM reads/s\n", (iterations/time_spent)/1'000'000);
 	// cleanup
 	peripheral::unmap_io( io_base ); // made it explicit for sake of making it
 	                                 // clear this is an invalid pointer now.

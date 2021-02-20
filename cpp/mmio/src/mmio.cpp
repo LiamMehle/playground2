@@ -104,3 +104,10 @@ bool peripheral::gpio_read( uint32_t* base_io, int pin ) noexcept {
 	const uint_fast8_t shift = pin%32;
 	return *gpio_lev & 1<<shift;
 }
+
+volatile uint32_t peripheral::gpio_read_page( uint32_t* base_io ) noexcept {
+	uint32_t* const gpio_lev =
+		address::offset( base_io, address::offset_gpio +
+															address::offset_gpio_lev );
+	return *gpio_lev;
+}
