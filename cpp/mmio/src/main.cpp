@@ -71,6 +71,6 @@ int main() {
 
 	// cleanup
 	peripheral::unmap_io( io_base ); // made it explicit for sake of making it
-	io_base = nullptr;               // clear this is an invalid pointer now.
+	                                 // clear this is an invalid pointer now.
 	return 0;
 }
