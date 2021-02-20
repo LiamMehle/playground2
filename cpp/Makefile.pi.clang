@@ -1,0 +1,6 @@
+# wrapper around Makefile to make it more RPi3B friendly
+include ../Makefile
+
+CC     = clang # CFLAGS enables fpu and simd optimization
+CXX    = clang++
+CFLAGS += -mcpu=cortex-a53 -mfpu=neon -mfloat-abi=hard
