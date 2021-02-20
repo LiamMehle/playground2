@@ -1,5 +1,5 @@
-#ifndef MMIOH
-#define MMIOH
+#ifndef MMIO_H
+#define MMIO_H
 
 #include <cstdint>
 

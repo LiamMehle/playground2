@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <time.h>
+#include "common.h"
 
 void msleep( uint_fast16_t msec ) {
 	const timespec req {
@@ -58,16 +59,17 @@ int main() {
 	namespace addr=peripheral::address;
 	// get access to memory-mapped gpio gregion
 	uint32_t* const io_base = peripheral::map_io();
-
-	if( io_base == NULL || io_base == (uint32_t*)-1 ) {
-		printf( "[ERROR] peripheral::map() returned %d\n", errno );
-		return errno;
-	}
+	int ret = check_ptr( io_base );
+	if( ret )
+		return ret;
 	//test_pin( io_base, 10);
 	puts("------------------------------");
 	test_function( io_base, peripheral::out);
 	puts("------------------------------");
 	test_function( io_base, peripheral::in);
+
+	peripheral::gpio_fs( io_base, 17, peripheral::out );
+	peripheral::gpio_write( io_base, 17, peripheral::high );
 
 	// cleanup
 	peripheral::unmap_io( io_base ); // made it explicit for sake of making it
