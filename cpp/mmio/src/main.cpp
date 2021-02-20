@@ -70,7 +70,7 @@ int main() {
 	test_function( io_base, peripheral::in);
 
 	// cleanup
-	peripheral::unmap_io( io_base ); // made it explicit for sake of making it clear
-	                             // this is an invalid pointer now.
+	peripheral::unmap_io( io_base ); // made it explicit for sake of making it
+	io_base = nullptr;               // clear this is an invalid pointer now.
 	return 0;
 }
