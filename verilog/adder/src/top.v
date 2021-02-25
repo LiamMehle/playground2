@@ -1,3 +1,11 @@
+
+/*
+Large chunks of this are implemented sloppily.
+It does, however, work.
+Mainly useful as a sanity check/known good sample.
+*/
+
+
 module adder_component( input A, input B, input carry_in, output C, output carry_out );
 
 wire a_xor_b;
@@ -9,15 +17,9 @@ assign carry_out = ( a_xor_b & carry_in ) | ( A & B);
 endmodule
 
 module adder( input [0:8-1]A, input [0:8-1]B, output [0:8-1]C );
-reg        zero;
 wire [0:8] carry;
 
-initial
-begin
-	zero <= 0;
-end
-
-assign carry[8] = zero; // hardcode no carry for first element (from element -1)
+assign carry[8] = 0; // hardcode no carry for first element (from element -1)
 
 genvar i;
 generate
@@ -40,24 +42,24 @@ begin
 	A <= 8'd02;
 	B <= 8'd02;
 #1;
-    $display("---------------");
-    $display("A=%x", A);
-    $display("B=%x", B);
-    $display("C=%x", C);
+		$display("---------------");
+		$display("A=%x", A);
+		$display("B=%x", B);
+		$display("C=%x", C);
 	A <= 8'd01;
 	B <= 8'd03;
 #1;
-    $display("---------------");
-    $display("A=%x", A);
-    $display("B=%x", B);
-    $display("C=%x", C);
+		$display("---------------");
+		$display("A=%x", A);
+		$display("B=%x", B);
+		$display("C=%x", C);
 	A <= 8'b1001_0010;
 	B <= 8'b1010_1011;
 #1;
-    $display("---------------");
-    $display("A=%x", A);
-    $display("B=%x", B);
-    $display("C=%x", C);
+		$display("---------------");
+		$display("A=%x", A);
+		$display("B=%x", B);
+		$display("C=%x", C);
 end
 
 endmodule

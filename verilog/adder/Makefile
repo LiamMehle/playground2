@@ -1,4 +1,4 @@
 include ../Makefile
 
 top_module = main
-bin_name   = none
+bin_name   = blob
