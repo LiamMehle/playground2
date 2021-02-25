@@ -8,4 +8,7 @@
 [[nodiscard]]
 int _check_ptr( const void* ptr, const char* file, int line ) noexcept;
 
+void msleep( uint_fast16_t msec );
+
+
 #endif

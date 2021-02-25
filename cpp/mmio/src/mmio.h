@@ -26,6 +26,21 @@ namespace peripheral {
 				constexpr uint64_t offset_irq_disable_2 = 0x000'0220;
 				constexpr uint64_t offset_irq_disable   = 0x000'0224;
 
+		// located at offset_fiq_enable
+		struct __attribute__((packed)) Fiq_control {
+			uint32_t source:7;
+			uint32_t enable:1;
+			uint32_t unused:24;
+		};
+
+		struct __attribute__((packed)) Dma_control_block { // must be 256-bit (32-byte) aligned
+			uint32_t transfer_information;
+			uint32_t src;
+			uint32_t dst;
+			uint32_t len;
+			uint32_t stride;
+			uint32_t next;
+		};
 
 		template<typename T1, typename T2>
 		constexpr
