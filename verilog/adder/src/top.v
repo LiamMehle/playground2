@@ -32,9 +32,9 @@ endgenerate
 endmodule
 
 module main;
-reg  [0:8-1] A;
-reg  [0:8-1] B;
-wire [0:8-1] C;
+reg  [7:0] A;
+reg  [7:0] B;
+wire [7:0] C;
 adder uut( A, B, C );
 
 initial
