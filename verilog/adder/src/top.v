@@ -16,16 +16,16 @@ assign carry_out = ( a_xor_b & carry_in ) | ( A & B);
 
 endmodule
 
-module adder( input [0:8-1]A, input [0:8-1]B, output [0:8-1]C );
-wire [0:8] carry;
+module adder( input [7:0]A, input [7:0]B, output [7:0]C );
+wire [8:0] carry;
 
-assign carry[8] = 0; // hardcode no carry for first element (from element -1)
+assign carry[0] = 0; // hardcode no carry for zero-th element (from element -1)
 
 genvar i;
 generate
-for( i = 7; i >= 0; i = i - 1 )//            bits are indexed 'backwards'
-begin //                         there is also no bit -1 so they're all shifted
-	adder_component adder_comp( A[i], B[i], carry[i+1], C[i], carry[i] );
+for( i=7; i>=0; i=i-1 )
+begin
+	adder_component adder_comp( A[i], B[i], carry[i], C[i], carry[i+1] );
 end
 endgenerate
 
