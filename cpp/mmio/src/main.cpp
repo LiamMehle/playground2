@@ -34,7 +34,7 @@ int main() {
 
 	const clock_t begin = clock();
 	#pragma unroll 4
-	for( int i = 0; i < iterations; ++i ) {
+	for( unsigned int i = 0; i < iterations; i++ ) {
 		// prefetch one cycle ahead. Experiments show 2 cycles ahead is too far
 		__builtin_prefetch( (void*)&gpio_value[i+1], 1, 0 ); // write, one-off
 		__builtin_prefetch( (void*)&gpio_time[i+1],  1, 0 );

@@ -29,6 +29,34 @@ begin
 end
 endgenerate
 
+initial
+begin
+	#1;
+	$display("---------------");
+	$display("A=%b", A);
+	$display("B=%b", B);
+	$display("C=%b", C);
+	$display("c=%b", carry);
+	#1;
+	$display("---------------");
+	$display("A=%b", A);
+	$display("B=%b", B);
+	$display("C=%b", C);
+	$display("c=%b", carry);
+	#1;
+	$display("---------------");
+	$display("A=%b", A);
+	$display("B=%b", B);
+	$display("C=%b", C);
+	$display("c=%b", carry);
+	#1;
+	$display("---------------");
+	$display("A=%b", A);
+	$display("B=%b", B);
+	$display("C=%b", C);
+	$display("c=%b", carry);
+end
+
 endmodule
 
 module main;
@@ -43,36 +71,23 @@ begin
 	B <= 8'd02;
 #1;
 		$display("---------------");
-		$display("A=%x", A);
-		$display("B=%x", B);
-		$display("C=%x", C);
+		$display("A=%b", A);
+		$display("B=%b", B);
+		$display("C=%b", C);
 	A <= 8'd01;
 	B <= 8'd03;
 #1;
 		$display("---------------");
-		$display("A=%x", A);
-		$display("B=%x", B);
-		$display("C=%x", C);
+		$display("A=%b", A);
+		$display("B=%b", B);
+		$display("C=%b", C);
 	A <= 8'b1001_0010;
 	B <= 8'b1010_1011;
 #1;
 		$display("---------------");
-		$display("A=%x", A);
-		$display("B=%x", B);
-		$display("C=%x", C);
+		$display("A=%b", A);
+		$display("B=%b", B);
+		$display("C=%b", C);
 end
 
 endmodule
-
-/*
-module main_b;
-reg value;
-initial
-begin
-    value <= 1;
-    #1;
-    $display("Hello, World %d", value);
-    $finish ;
-end
-endmodule
-*/
