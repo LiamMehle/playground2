@@ -1,0 +1,86 @@
+#include <iostream>
+
+#include <vector>
+#include <atomic>
+
+#include <string>
+#include <cstring>
+#include <string_view>
+
+#include <dirent.h>
+#include <sys/types.h>
+
+#include <cstdlib>
+
+#include <future>
+#include <mutex>
+
+#define UID1(a, b) a##b              // concatenate
+#define UID2(a, b) UID1(a, b)        // evaluate
+#define UID UID2(___id, __COUNTER__) // add unique value to the end
+
+struct file_data {
+	std::string path;
+	std::string_view name;
+	unsigned int inode;
+};
+
+//std::atomic<char> active_threads(0);
+
+std::vector<file_data> enum_recursive( const std::string path ) {
+	std::vector<file_data> ret;           // final return value
+	std::vector<file_data> ret_recursive; // returns from recursive calls
+	DIR * const dir = opendir( path.c_str() );
+	dirent* en_temp;
+	if( dir == NULL )
+		return std::vector<file_data>{};
+
+	while( (en_temp = readdir( dir )) != NULL ) { // main loop
+
+		if( strcmp( en_temp->d_name, ".") == 0 ||   // prevent re-opening same dir
+		    strcmp( en_temp->d_name, "..") == 0 )   // prevent traversing up
+			continue;
+
+		const std::string new_path  = path + "/" + en_temp->d_name;
+		const unsigned int name_len = strlen( en_temp->d_name );
+
+		switch( en_temp->d_type ) {
+			case DT_REG:
+				ret.push_back({
+					.path = std::move(new_path),
+					.name = std::move(std::string_view( &(*new_path.cend())-name_len, name_len )),
+					.inode = en_temp->d_ino
+				});
+				continue;
+
+			case DT_DIR:
+					auto temp = enum_recursive( new_path.c_str() ); // need to give a copy
+					ret_recursive.insert( ret_recursive.end(), temp.begin(), temp.end() );
+				continue;
+		}
+	}
+	closedir( dir );
+	ret.insert( ret.end(), ret_recursive.begin(), ret_recursive.end() );
+	return ret;
+}
+
+void enum_recursive( const std::string path, std::mutex mtx, std::vector<file_data>* ret ) {
+	std::vector<file_data> temp = enum_recursive( path );
+	std::lock_guard<std::mutex> UID (mtx);
+	*ret = std::move(temp);
+}
+
+int main() {
+	const std::string entry_path = [](){
+		std::string temp( 256, '\0');
+		realpath(".", temp.data() );
+		temp.shrink_to_fit();
+		return temp;
+	}();
+	const std::vector<file_data> files = enum_recursive( entry_path );
+
+	for( auto& file : files ) {
+		std::cout << "path: " << file.path << "\tino: " << file.inode << '\n';
+	}
+	return 0;
+}

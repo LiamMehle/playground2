@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/batt_tool.dir/src/main.c.o  -o bin/batt_tool -Wl,-rpath,build 

@@ -1,0 +1,21 @@
+# main logic for compiling C/C++
+
+a := $(notdir $(wildcard src/*.s))
+b := $(a:.s=.o)
+.PHONY: Makefile ../Makefile # todo: fix
+
+CFLAGS   +=
+
+all: $(b)
+	ld $(addprefix obj/,$(b)) -o bin/$(binary_name)
+
+%.o : make_dirs src/%.s
+	as -o obj/$@ src/$(subst .o,.s,$@)
+
+make_dirs:
+	-mkdir obj
+	-mkdir bin
+
+clean:
+	-rm -r obj
+	-rm -r bin

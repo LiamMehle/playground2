@@ -1,0 +1,32 @@
+# main logic for compiling C/C++
+
+# generate list of object files to generate
+# enumerate sources, replaec .cpp with .o
+
+a      := $(notdir $(wildcard src/*.cpp)) $(notdir $(wildcard src/*.c))
+b      := $(subst .c,.o,$(a:.cpp=.o))
+
+obj_dir_clean =/tmp/make_$(binary_name)
+obj_dir       =$(obj_dir_clean)/obj
+
+.PHONY: Makefile ../Makefile ../Makefile.pi # todo: fix
+
+OPTFLAGS =
+CFLAGS += $(OPTFLAGS)
+
+all: $(b)
+	$(CXX) $(CFLAGS) $(LIBS) $(addprefix $(obj_dir)/,$(b)) -o bin/$(binary_name)
+
+%.o : make_dirs src/%.cpp
+	$(CXX) -c -o $(obj_dir)/$@ src/$(subst .o,.cpp,$@) $(CFLAGS)
+
+%.o : make_dirs src/%.c
+	$(CC) -c -o $(obj_dir)/$@ src/$(subst .o,.c,$@) $(CFLAGS)
+
+make_dirs:
+	-mkdir -p $(obj_dir)
+	-mkdir bin
+
+clean:
+	-rm -r $(obj_dir_clean)
+	-rm -r bin

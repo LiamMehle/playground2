@@ -1,0 +1,3 @@
+/home/pi/playground2/cpp/batt_tool/CMakeFiles/rebuild_cache.dir
+/home/pi/playground2/cpp/batt_tool/CMakeFiles/batt_tool.dir
+/home/pi/playground2/cpp/batt_tool/CMakeFiles/edit_cache.dir
