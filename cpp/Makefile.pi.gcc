@@ -1,5 +1,6 @@
 # wrapper around Makefile to make it more RPi3B friendly
 include ../Makefile.main
 
-CC     = gcc # CFLAGS enables fpu and simd optimization
+CC     = ccache gcc# CFLAGS enables fpu and simd optimization
+CXX     = ccache g++
 CFLAGS += -mcpu=cortex-a53 -mfpu=vfpv4 -mfloat-abi=hard

@@ -1,0 +1,7 @@
+# wrapper around Makefile for win64 compilation
+
+export CC     = x86_64-w64-mingw32-gcc
+export CXX    = ccache x86_64-w64-mingw32-g++
+#export CFLAGS +=
+
+include ../Makefile.main

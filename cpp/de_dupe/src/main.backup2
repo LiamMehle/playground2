@@ -1,0 +1,109 @@
+#include <stdio.h>
+
+#include <vector>
+#include <atomic>
+
+#include <dirent.h>
+#include <sys/types.h>
+
+#include <string>
+#include <cstring>
+#include <string_view>
+
+#define UID1(a, b) a##b              // concatenate
+#define UID2(a, b) UID1(a, b)        // evaluate
+#define UID UID2(___id, __COUNTER__) // add unique value to the end
+
+struct file_data {
+	std::string path;
+	std::string_view name;
+	unsigned int inode;
+};
+
+std::atomic<char> active_threads(0);
+
+void indent( const int count ) {
+	for( int i = 0; i < count; i++ )
+		putchar(' ');
+}
+
+template<typename T>
+class inc_dec {
+private:
+	T* const value_p;
+public:
+	inc_dec(T& value) : value_p(&value) {
+		(*value_p)++;
+	}
+	~inc_dec() {
+		(*value_p)--;
+	}
+};
+
+template<typename T>
+class defer {
+private:
+	T f;
+public:
+	defer(T* func) : f(func) {}
+	~defer() { f(); }
+};
+
+std::vector<dirent> enum_dir( const std::string path ) {
+	std::vector<dirent> en;
+	dirent* en_temp;
+	DIR * const dir = opendir( path.c_str() );
+	while( (en_temp = readdir( dir )) != NULL ) {
+		en.push_back( *en_temp );
+	}
+	closedir( dir );
+	en.shrink_to_fit();
+	return en;
+}
+
+// to-do: cleanup
+std::vector<file_data> process_dir( const std::string path, const int indent_c ){
+	inc_dec<std::atomic<char>> UID {active_threads};
+	std::vector<file_data> ret(10); // nice conservative value
+
+	std::vector<dirent> dir_entries = enum_dir( path );
+
+	for ( unsigned int i = 0; i < dir_entries.size(); i++ ) {      // for each entry
+		// define values used in iteration
+		const std::string new_path  = path + "/" + dir_entries[i].d_name;
+		const unsigned int name_len = std::strlen( dir_entries[i].d_name );
+		const int type = dir_entries[i].d_type;
+
+		switch ( type ) {                            // check type
+case DT_REG:                                     // if file, store data
+			ret.push_back(file_data{ // record data
+				.path  = std::move( new_path ),
+				.name  = std::move(std::string_view( &(*new_path.cend())-name_len, name_len )),
+				.inode = dir_entries[i].d_ino
+			});
+			indent( indent_c );     // print data
+			printf("reg: %24s\t%d\n", ret.back().name.begin(),
+			                          ret.back().inode );
+			continue;
+
+case DT_DIR:                                     // if directory, recurse
+			if( std::strcmp( dir_entries[i].d_name, ".")  == 0 || // avoid infinite recursion
+			    std::strcmp( dir_entries[i].d_name, "..") == 0 )
+					continue;
+			indent( indent_c ); // print entering dir
+			printf("dir: %s\n", dir_entries[i].d_name );
+			process_dir( new_path.c_str(), indent_c+1 );
+		}
+	}
+	return ret;
+}
+
+int main() {
+	std::vector<file_data> data(1000);
+	{
+		char temp[1024];
+		realpath(".", temp );
+		data = process_dir( temp, 0 );
+	}
+	return 0;
+}

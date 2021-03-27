@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#include <vector>
+#include <array>
+#include <atomic>
+
+#include <dirent.h>
+#include <sys/types.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct file_data {
+	std::string name;
+	unsigned int inode;
+};
+
+std::atomic<char> active_threads(0);
+
+void indent( const char count ) {
+	for( int i = 0; i < count; i++ )
+		putchar(' ');
+}
+
+std::vector<file_data> process_dir( const char* const path, const char indent_c ){
+	active_threads++;
+	std::vector<file_data> ret;
+
+	// indent(indent_c);
+	// printf("entering d %s\n", path );
+
+	DIR * const dir  = opendir(path);;
+	struct dirent *en;
+	if( !dir ) {
+		fprintf( stderr, "[error]directory does not exist!");
+		goto end;
+	}
+
+	while( (en = readdir( dir )) != NULL ) {
+		if( en->d_type == DT_REG ) {
+			indent(indent_c);
+			printf("f/%s\n", en->d_name );
+		}
+		if( en->d_type == DT_DIR ) {
+			if( strcmp( en->d_name, ".")  != 0 && // avoid infinite recursion
+			    strcmp( en->d_name, "..") != 0 ) {
+				indent(indent_c);
+				printf("d/%s\n", en->d_name );
+				char temp[1024];
+				strcpy( temp, path );
+				strcat( temp, "/" );
+				strcat( temp, en->d_name );
+				process_dir( temp, indent_c+1 );
+			}
+		}
+	}
+	closedir( dir );
+
+end:
+	active_threads--;
+	return ret;
+}
+
+int main() {
+	//std::vector<file_data> data(1000);
+	//active_threads = 0;
+	{
+		char temp[1024];
+		realpath(".", temp );
+		process_dir( temp, 0 );
+	}
+	return 0;
+}
