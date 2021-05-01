@@ -9,5 +9,5 @@ include ../Makefile.x86_64.gcc      # compilation logic
 
 # aditional project-specific flags
 CFLAGS += -Wall -Wconversion -Wextra -Werror -O0 -fno-exceptions -std=c++17
-CFLAGS += -g -fsanitize=address
+CFLAGS += -g
 CFLAGS += #-I /usr/include/arm-linux-gnueabihf/

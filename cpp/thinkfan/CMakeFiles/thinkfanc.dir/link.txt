@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic -lasan CMakeFiles/thinkfanc.dir/src/get_temp.cpp.o CMakeFiles/thinkfanc.dir/src/main.cpp.o CMakeFiles/thinkfanc.dir/src/set_level.c.o -o bin/thinkfanc 

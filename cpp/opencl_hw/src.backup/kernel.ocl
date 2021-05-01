@@ -1,0 +1,4 @@
+__kernel void to_upper( __global char* src ) {
+	__private const size_t id =  get_global_id(0);
+	src[id] = 'A';
+}

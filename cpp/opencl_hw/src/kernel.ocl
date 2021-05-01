@@ -1,0 +1,22 @@
+__kernel void to_upper( __global char* src ) {
+	__private const size_t id =  get_global_id(0);
+	//__private const size_t is_upper  =  64 < src[id] && src[id] < 91;
+	__private const size_t is_lower =   96 < src[id] && src[id] < 122;
+	__private size_t mask;
+	mask = ~(is_lower << 5) ;
+	src[id] = src[id] & mask;
+}
+
+__kernel void to_lower( __global char* src ) {
+	__private const size_t id =  get_global_id(0);
+	__private const size_t is_upper  =  64 < src[id] && src[id] < 91;
+	//__private const size_t is_lower =   96 < src[id] && src[id] < 122;
+	__private size_t mask;
+	mask = ~(is_upper << 5) ;
+	src[id] = src[id] & mask;
+}
+
+__kernel void add1( __global char* src ) {
+	__private const size_t id =  get_global_id(0);
+	src[id] = '1';
+}

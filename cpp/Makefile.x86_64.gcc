@@ -3,4 +3,4 @@ include ../Makefile.main
 
 CC     = ccache gcc# CFLAGS enables fpu and simd optimization
 CXX     = ccache g++
-CFLAGS += -march=native
+#CFLAGS += -march=native

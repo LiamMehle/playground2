@@ -14,7 +14,7 @@ M = 10**6
 c = 299_792_458
 freq = [ midpoint( 137*M, 174*M, .7 ) , 446.3*M ]
 
-wavelen = [ x/c for x in freq ]
+wavelen  = [ x/c for x in freq ]
 monopole = [ x/2 for x in wavelen ]
 
 antena_lens = list(range(2))
@@ -31,3 +31,9 @@ for len in antena_lens[0]:
 		break
 
 quit(0)
+
+for( int j = 0; j < count[i]; j++ )
+
+const int array_len = (int)strlen(array);
+for( int i = 0; i < count_len; i++ )
+puts("Vnesite niz:");

@@ -8,6 +8,6 @@ include ../Makefile.x86_64.gcc      # compilation logic
 #include ../Makefile.pi.clang       # compilation logic
 
 # aditional project-specific flags
-CFLAGS += -Wall -Wconversion -Wextra -Werror -O1 -fno-exceptions -std=c17
-CFLAGS += -g
+CFLAGS += -std=c17 -Wall -Wconversion -Wextra -Ofast -fno-exceptions
+CFLAGS += 
 CFLAGS +=#-fsanitize=address # -I /usr/include/arm-linux-gnueabihf/ 
