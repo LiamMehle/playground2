@@ -1,0 +1,1 @@
+cycle_activity.stalls_l1d_miss,cycle_activity.stalls_l2_miss,cycle_activity.stalls_mem_any, cycle_activity.stalls_total, resource_stalls.any, uops_executed.stall_cycles

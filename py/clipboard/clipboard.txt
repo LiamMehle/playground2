@@ -1,38 +1,15 @@
-// brez tega bi mogel uporabljati syscalls
-// tej, so pa odvisni od sistema
-#include <stdio.h>
+Kyriu Coco, thank you for the years of entertainment, for being you. For pushing the limits occasionally and getting away with it. For chearing us up when we were feeling down.
 
-static inline  void swap(char* const a, char* const b) {
-    const char old_a = *a;
-    *a = *b;
-    *b = old_a;
-}
+For bringing Jp and En together. For doing your best.
 
-static inline size_t strlen(const char* const str) {
-    size_t len = 0;
-    while(str[len] != '\0')
-        len++;
-    return len;
-}
+We all missed you since your last stream, and as we can see, the flame kept burning for the last 3 months.
 
-void print_permutations_internal(char* const str, const size_t len, const size_t index) {
-    if(index+1 == len)
-        printf("%s\n", str);
-    // find all possible values for str[index]
-    for(size_t i = index; i < len; i++) {
-        swap(&str[index], &str[i]);
-        print_permutations_internal(str, len, index+1);
-        swap(&str[index], &str[i]);
-    }
-}
+People are still becoming members, despite your last public appearance being long ago.
 
-void print_permutations(char* const str, size_t len) {
-    print_permutations_internal(str, len, 0);
-}
+We love you, we miss you, and we hope you're still doing well.
+Best of luck.
 
-int main() {
-    char str[] = "IZPIT";
-    const size_t len = strlen(str);
-    print_permutations(str, len);
-    return 0;
-}
+楽しかった。
+ありが-thanks ござい-much、 会長さま。
+仕事頑張れ。
+さよなら。o7

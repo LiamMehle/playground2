@@ -1,0 +1,441 @@
+==74552== Memcheck, a memory error detector
+==74552== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==74552== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==74552== Command: ./main
+==74552== 
+MESA-INTEL: warning: Performance support disabled, consider sysctl dev.i915.perf_stream_paranoid=0
+
+==74552== 
+==74552== HEAP SUMMARY:
+==74552==     in use at exit: 285,346 bytes in 1,645 blocks
+==74552==   total heap usage: 52,681 allocs, 46,937 frees, 955,012,945 bytes allocated
+==74552== 
+==74552== 8 bytes in 1 blocks are definitely lost in loss record 41 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x56184FA: ???
+==74552==    by 0x5617E74: ???
+==74552==    by 0x55FEED9: ???
+==74552==    by 0x48C1D0F: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 16 bytes in 1 blocks are definitely lost in loss record 178 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x560DF90: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 32 bytes in 1 blocks are definitely lost in loss record 199 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0xBA05C17: ???
+==74552==    by 0xB8588AD: ???
+==74552==    by 0xB84F2C6: ???
+==74552==    by 0xB248582: ???
+==74552==    by 0xBBF3C65: ???
+==74552==    by 0xB23D1DA: ???
+==74552==    by 0x4CCD3FF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552==    by 0x4014209: dl_open_worker (in /usr/lib/ld-2.33.so)
+==74552== 
+==74552== 32 bytes in 1 blocks are definitely lost in loss record 200 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x56FFB17: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FD8C6: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF08E: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF1A1: xcb_wait_for_reply (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0xAC312F2: ???
+==74552==    by 0x487FEF2: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10A9FA: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 32 bytes in 1 blocks are definitely lost in loss record 201 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x56FFB17: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FD8C6: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF08E: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF1A1: xcb_wait_for_reply (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0xAC312F2: ???
+==74552==    by 0x487FF98: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10A9FA: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 32 bytes in 1 blocks are definitely lost in loss record 202 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x56FFB17: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FD8C6: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF08E: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF1A1: xcb_wait_for_reply (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0xAC312F2: ???
+==74552==    by 0x487FEF2: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10AB03: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 32 bytes in 1 blocks are definitely lost in loss record 203 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x56FFB17: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FD8C6: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF08E: ??? (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0x56FF1A1: xcb_wait_for_reply (in /usr/lib/libxcb.so.1.1.0)
+==74552==    by 0xAC312F2: ???
+==74552==    by 0x487FF98: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10AB03: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 40 bytes in 1 blocks are definitely lost in loss record 205 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x55DEA3A: ???
+==74552==    by 0x48C1B35: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 40 bytes in 1 blocks are definitely lost in loss record 206 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x55DEA58: ???
+==74552==    by 0x48C1B35: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 40 bytes in 1 blocks are definitely lost in loss record 207 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x55DEA76: ???
+==74552==    by 0x48C1B35: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 40 bytes in 1 blocks are definitely lost in loss record 208 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x5602A85: ???
+==74552==    by 0x5606CD2: ???
+==74552==    by 0x5606212: ???
+==74552==    by 0x5606A68: ???
+==74552==    by 0x5627B81: ???
+==74552==    by 0x560DF7D: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552== 
+==74552== 48 (16 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 215 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x560DDFB: ???
+==74552==    by 0x560DF49: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 48 (24 direct, 24 indirect) bytes in 1 blocks are definitely lost in loss record 216 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0x755229B: ???
+==74552==    by 0x7546100: ???
+==74552==    by 0x75576F0: ???
+==74552==    by 0x5FDCC68: ???
+==74552==    by 0x6042C45: ???
+==74552==    by 0x5FDC1DA: ???
+==74552==    by 0x4CD4EFF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552==    by 0x4014209: dl_open_worker (in /usr/lib/ld-2.33.so)
+==74552== 
+==74552== 64 bytes in 1 blocks are definitely lost in loss record 303 of 497
+==74552==    at 0x484383F: realloc (vg_replace_malloc.c:1192)
+==74552==    by 0x55F5FF9: ???
+==74552==    by 0x55F6941: ???
+==74552==    by 0x55F91BC: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 128 bytes in 1 blocks are definitely lost in loss record 377 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0x755229B: ???
+==74552==    by 0x7547839: ???
+==74552==    by 0x75462BE: ???
+==74552==    by 0x7556448: ???
+==74552==    by 0x5FDCC68: ???
+==74552==    by 0x6042C45: ???
+==74552==    by 0x5FDC1DA: ???
+==74552==    by 0x4CD4EFF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552== 
+==74552== 144 bytes in 1 blocks are definitely lost in loss record 379 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0xAA7840E: ???
+==74552==    by 0xAA78772: ???
+==74552==    by 0xAA7CC5E: ???
+==74552==    by 0xAC313AA: ???
+==74552==    by 0x487FEF2: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10A9FA: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 144 bytes in 1 blocks are definitely lost in loss record 380 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0xAA7840E: ???
+==74552==    by 0xAA78772: ???
+==74552==    by 0xAA7CC5E: ???
+==74552==    by 0xAC313AA: ???
+==74552==    by 0x487FF98: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10A9FA: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 144 bytes in 1 blocks are definitely lost in loss record 381 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0xAA7840E: ???
+==74552==    by 0xAA78772: ???
+==74552==    by 0xAA7CC5E: ???
+==74552==    by 0xAC313AA: ???
+==74552==    by 0x487FEF2: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10AB03: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 144 bytes in 1 blocks are definitely lost in loss record 382 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0xAA7840E: ???
+==74552==    by 0xAA78772: ???
+==74552==    by 0xAA7CC5E: ???
+==74552==    by 0xAC313AA: ???
+==74552==    by 0x487FF98: ??? (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x4883217: vkEnumeratePhysicalDevices (in /usr/local/lib/libvulkan.so.1.2.132)
+==74552==    by 0x10AB03: app::pick_physical_device() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A647: app::init_vulkan() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A627: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 160 bytes in 1 blocks are definitely lost in loss record 383 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0xBA05C17: ???
+==74552==    by 0xB840AFD: ???
+==74552==    by 0xB84F2C6: ???
+==74552==    by 0xB84188B: ???
+==74552==    by 0xB247A71: ???
+==74552==    by 0xBBF3C65: ???
+==74552==    by 0xB23D1DA: ???
+==74552==    by 0x4CCD3FF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552== 
+==74552== 408 bytes in 1 blocks are definitely lost in loss record 396 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0x561825C: ???
+==74552==    by 0x5617E74: ???
+==74552==    by 0x55FEED9: ???
+==74552==    by 0x48C1D0F: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 590 (128 direct, 462 indirect) bytes in 1 blocks are definitely lost in loss record 411 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0x755229B: ???
+==74552==    by 0x7547839: ???
+==74552==    by 0x75447E8: ???
+==74552==    by 0x7545E6C: ???
+==74552==    by 0x7556412: ???
+==74552==    by 0x5FDCC68: ???
+==74552==    by 0x6042C45: ???
+==74552==    by 0x5FDC1DA: ???
+==74552==    by 0x4CD4EFF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552== 
+==74552== 1,104 (16 direct, 1,088 indirect) bytes in 1 blocks are definitely lost in loss record 468 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x560095A: ???
+==74552==    by 0x5604CAB: ???
+==74552==    by 0x560621E: ???
+==74552==    by 0x5606A68: ???
+==74552==    by 0x5627B81: ???
+==74552==    by 0x560DF7D: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552== 
+==74552== 2,048 bytes in 1 blocks are definitely lost in loss record 475 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x5602B8B: ???
+==74552==    by 0x5606CD2: ???
+==74552==    by 0x5606212: ???
+==74552==    by 0x5606A68: ???
+==74552==    by 0x5627B81: ???
+==74552==    by 0x560DF7D: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552== 
+==74552== 4,923 (104 direct, 4,819 indirect) bytes in 1 blocks are definitely lost in loss record 485 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0xBA05C17: ???
+==74552==    by 0xBBE93DD: ???
+==74552==    by 0xB84F2C6: ???
+==74552==    by 0xBBE95A3: ???
+==74552==    by 0xB25445C: ???
+==74552==    by 0xBBF3C65: ???
+==74552==    by 0xB23D1DA: ???
+==74552==    by 0x4CCD3FF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552== 
+==74552== 5,762 (52 direct, 5,710 indirect) bytes in 1 blocks are definitely lost in loss record 486 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x56004DE: ???
+==74552==    by 0x56007E8: ???
+==74552==    by 0x5606B83: ???
+==74552==    by 0x5606212: ???
+==74552==    by 0x5606A68: ???
+==74552==    by 0x5627B81: ???
+==74552==    by 0x560DF7D: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552== 
+==74552== 8,192 bytes in 1 blocks are definitely lost in loss record 489 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0x55E678B: ???
+==74552==    by 0x55F6584: ???
+==74552==    by 0x55F91BC: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 16,416 (64 direct, 16,352 indirect) bytes in 1 blocks are definitely lost in loss record 491 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x55E6927: ???
+==74552==    by 0x55F8930: ???
+==74552==    by 0x48C1B45: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A6A8: app::run() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552==    by 0x10A713: main (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 17,075 (64 direct, 17,011 indirect) bytes in 1 blocks are definitely lost in loss record 492 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0x5601037: ???
+==74552==    by 0x560D763: ???
+==74552==    by 0x5627BD3: ???
+==74552==    by 0x560DF7D: ???
+==74552==    by 0x560E0FB: ???
+==74552==    by 0x55F5A86: ???
+==74552==    by 0x55F918E: ???
+==74552==    by 0x48C03A4: getSystemContentScale (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48C1C6D: _glfwPlatformInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x48B5176: glfwInit (in /usr/local/lib/libglfw.so.3.4)
+==74552==    by 0x10A5CC: app::init() (in /home/wolf/git/playground2/cpp/vulkan/build/main)
+==74552== 
+==74552== 23,773 (6,024 direct, 17,749 indirect) bytes in 1 blocks are definitely lost in loss record 494 of 497
+==74552==    at 0x48435FF: calloc (vg_replace_malloc.c:1117)
+==74552==    by 0x755229B: ???
+==74552==    by 0x7549275: ???
+==74552==    by 0x75447D0: ???
+==74552==    by 0x7545E6C: ???
+==74552==    by 0x7556412: ???
+==74552==    by 0x5FDCC68: ???
+==74552==    by 0x6042C45: ???
+==74552==    by 0x5FDC1DA: ???
+==74552==    by 0x4CD4EFF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552== 
+==74552== 72,704 bytes in 1 blocks are definitely lost in loss record 496 of 497
+==74552==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==74552==    by 0xB24DCC5: ???
+==74552==    by 0xBBF3C65: ???
+==74552==    by 0xB23D1DA: ???
+==74552==    by 0x4CCD3FF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552==    by 0x4014209: dl_open_worker (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDCE7: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552==    by 0x40139BA: _dl_open (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4E9336B: ??? (in /usr/lib/libdl-2.33.so)
+==74552== 
+==74552== 125,061 (896 direct, 124,165 indirect) bytes in 1 blocks are definitely lost in loss record 497 of 497
+==74552==    at 0x484383F: realloc (vg_replace_malloc.c:1192)
+==74552==    by 0x7551542: ???
+==74552==    by 0x75478D0: ???
+==74552==    by 0x7544F3E: ???
+==74552==    by 0x7557158: ???
+==74552==    by 0x5FDCC68: ???
+==74552==    by 0x6042C45: ???
+==74552==    by 0x5FDC1DA: ???
+==74552==    by 0x4CD4EFF: ??? (in /usr/lib/libc-2.33.so)
+==74552==    by 0x400FDE8: call_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x400FF1B: _dl_init (in /usr/lib/ld-2.33.so)
+==74552==    by 0x4DFDD44: _dl_catch_exception (in /usr/lib/libc-2.33.so)
+==74552== 
+==74552== LEAK SUMMARY:
+==74552==    definitely lost: 92,012 bytes in 32 blocks
+==74552==    indirectly lost: 187,412 bytes in 1,593 blocks
+==74552==      possibly lost: 0 bytes in 0 blocks
+==74552==    still reachable: 5,890 bytes in 19 blocks
+==74552==         suppressed: 32 bytes in 1 blocks
+==74552== Reachable blocks (those to which a pointer was found) are not shown.
+==74552== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==74552== 
+==74552== For lists of detected and suppressed errors, rerun with: -s
+==74552== ERROR SUMMARY: 32 errors from 32 contexts (suppressed: 0 from 0)

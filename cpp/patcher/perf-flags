@@ -1,0 +1,12 @@
+cycle_activity.stalls_l1d_miss
+cycle_activity.stalls_l2_miss
+cycle_activity.stalls_mem_any
+cycle_activity.stalls_total
+resource_stalls.any
+uops_executed.stall_cycles
+
+bin/main `pwd`/test.txt '7465' '6574'
+rm test.txt ; for i in {1..1002}; do echo test >> test.txt; done
+
+perf stat -e `cat perf-flags | sed -z 's/\n/,/g' | sed 's/,$//'` bin/main `pwd`/test.txt '7465' '6574'
+

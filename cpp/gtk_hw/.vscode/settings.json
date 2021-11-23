@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "thread": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "type_traits": "cpp",
+        "stop_token": "cpp",
+        "atomic": "cpp",
+        "climits": "cpp"
+    }
+}

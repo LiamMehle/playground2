@@ -1,0 +1,26 @@
+patern
+[name]
+	[day]
+		[from] [-] [to]
+		[from] [-] [to]
+	[day]
+		[from] [-] [to]
+...
+
+id = indent
+if id == 3
+	from = 'tab':'-'
+	to   = '-':[' ' or '$']
+assign to parent*
+
+*if id == 0
+	parent = root
+
+
+IDs
+root    = -1
+subject = 0
+day     = 1
+time    = 2
+
+

@@ -1,0 +1,36 @@
+// naiive implementation of std::array due to necessity
+#pragma once
+template<typename T, int I>
+class Array {
+public:
+	T data[I];
+	size_t size() {
+		return I;
+	}
+	T& operator[](size_t i) {
+		return data[i];
+	}
+	T operator[](size_t i) const {
+		return data[i];
+	}
+};
+
+template<>
+class Array<bool> {
+public:
+	T data[I];
+	size_t size() {
+		return I;
+	}
+	T operator[](size_t i) const {
+		auto const byte = i/8;
+		auto const bit  = i%8;
+		return data[byte] & (1<<bit);
+	}
+
+	//T operator[](size_t i) {
+	//	auto const byte = i/8;
+	//	auto const bit  = i%8;
+	//	return data[byte] & (1<<bit);
+	//}
+};

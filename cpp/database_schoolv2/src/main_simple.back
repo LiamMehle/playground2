@@ -1,0 +1,194 @@
+#include <stdio.h>
+#include <assert.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define assume(x) if(!x) __builtin_unreachable()
+#define ALLOCA_MAX 1024
+#define NAME_LEN 64
+#define GRADE_COUNT 10
+// code assumes that SEEK_END is implemented
+
+typedef struct {
+	char name[NAME_LEN];
+	char surname[NAME_LEN];
+	uint32_t id;
+	uint8_t grades[GRADE_COUNT];
+} student_t;
+
+enum status{
+	success = 0,
+	generic_error,
+	emem,
+	eseek,
+	ewrite,
+	eread,
+};
+
+// finds substring(target) in string
+// there is probbably much room for optimizaiton here
+size_t find(const char* const string, const char* const target,
+            const size_t from) {
+	assert(string[0] != '\0');
+	assert(target[0] != '\0');
+	size_t string_index = from;
+	size_t target_index = 0;
+	
+	for(; string[string_index] != '\0'; string_index++) {
+		if(string[string_index] != target[target_index]) {
+			target_index = 0;
+			continue;
+		} else { // they match
+			target_index++;
+			if(target[target_index] == '\0') // end of string
+				return string_index - strlen(target);
+		}
+	}
+	return -1; // failed to find substring
+}
+
+// like find() but searches backwards
+size_t rfind(const char* const string, const char* const target,
+            const size_t from) {
+	assert(string[0] != '\0');
+	assert(target[0] != '\0');
+	assert(string[from] != 0);
+	size_t string_index = from;
+	size_t target_string_len = strlen(target);
+	assert(target_string_len != 0);
+	size_t target_index = target_string_len-1;
+	
+	for(; string_index > 0; string_index--) {
+		if(string[string_index] != target[target_index]) {
+			target_index = target_string_len-1;
+			continue;
+		} else { // they match
+			target_index--;
+			if(target_index == 0) // end of string
+				return string_index;
+		}
+	}
+	return -1; // failed to find substring
+}
+
+// make file if it does not already exist, check fopen()
+FILE* open_or_default(const char* const  filename) {
+	FILE* data_fd = fopen(filename, "r+");
+	if(!data_fd) // file might not exist, if so, make one
+		data_fd = fopen(filename, "w+");
+	return data_fd;
+}
+
+size_t fgetsize(FILE* const  file) {
+	fpos_t current_pos;
+	0 == fgetpos(file, &current_pos);
+	0 == fseek(file, 0, SEEK_END);
+	const size_t size = ftell(file);
+	assert(0 == fsetpos(file, &current_pos));
+	return size;
+}
+
+// allocates buffer and reads file
+char* file_to_buffer(FILE* const  file,
+                   size_t* const  sizep) {
+	const size_t size = fgetsize(file); // a zero-size file is valid
+	if(size == 0)                       // but then there is nothing
+		return NULL;                    // to read
+	char* const buffer = (char*)malloc(size);
+	fread(buffer, size, 1, file);
+	*sizep = size;
+	return buffer;
+}
+
+int print_file(FILE* const  file) { // prints file
+	size_t size;
+	const char* const  data = file_to_buffer(file, &size);
+	if(data == NULL)          // nothing to print
+		return -generic_error;
+	puts(data);
+	free((char* const)data);
+	return success;
+}
+
+int insert_student(FILE* const  data,
+         const student_t* const s) {
+	int ret;
+	ret = fseek(data, 0, SEEK_END);
+	ret = fputc('\n', data);
+	ret |= fprintf(data, "ime:\"%s\",\n"
+	              "priimek:\"%s\"\n"
+	              "vpisna:%010u\n"
+	              "ocene:[ ", s->name, s->surname, s->id);
+	for(int i = 0; i < 10; i++)
+		ret |= fprintf(data, "%u ", s->grades[i]);
+	ret |= fputc(']', data);
+	return success;
+}
+
+int delete_student(const char* const  filename,
+                    const uint32_t id) {
+	FILE* file = fopen(filename, "r");
+	if(file == NULL)
+		return -eread; // nothing to delete
+	size_t size;
+	const char* const  data = file_to_buffer(file, &size);
+	fclose(file);
+	if(data == NULL)
+		return -generic_error; // probbably nothing to delete
+
+	size_t delete_from; // index of first element to delete
+	size_t delete_to;   // index past last element to delete
+	{
+		char* buffer = (char*)alloca(128);
+		sprintf(buffer, "id:%010u", id);
+
+		// get index into somewhere inside student data
+		const size_t index = find(data, buffer, 0);
+		delete_from = rfind(data, "\nname:", index);
+		delete_to   = find(data, "]", index);
+	} // deallocate buffer
+
+	file = fopen(filename, "w+");
+	fwrite(data          , delete_from-0, 1, file);
+	// do not write part to be deleted
+	fwrite(data+delete_to, size-delete_to, 1, file);
+	fclose(file);
+	return success;
+}
+
+// ------------------------------------------------------------
+
+bool file_exists(const char* const restrict filename) {
+	// fails if file does not exist
+	FILE* file = fopen(file_to_buffer, "r");
+	if(file == NULL)
+		return false;
+	fclose(file);
+	return true;
+}
+
+int main() {
+	const char* const data_filename = "data.txt";
+	FILE* file;
+	const bool existed = file_exists(data_filename);
+	if(existed)
+		file = fopen(data_filename, "r+");
+	else {
+		
+	}
+
+
+	FILE* const data_fd = open_or_default(data_filename);
+	if(!data_fd) {
+		printf("ni mogoče narediti/dostopati %s\n", data_filename);
+	}
+	// data_fd != 0
+
+	// command = get_commad(); //todo: implement
+
+	//switch(command) {}
+	fclose(data_fd);
+	return 0;
+}
+

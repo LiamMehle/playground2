@@ -1,0 +1,1 @@
+/usr/bin/clang -rdynamic CMakeFiles/data.dir/src/main.c.o -o data 
